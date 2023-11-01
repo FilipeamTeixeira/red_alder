@@ -37,3 +37,8 @@ Despite further analysis (e.g., Comparative Statistics, Predictive Models) being
 ## Question 5
 
 The analysis performed in 4, allows to explore the environmental impacts of agriculture in the top 10 wheat producers, specifically to Nitrogen dynamics. These insights could be used to improve the predictive power of the BNR's modelling suite. However, it is important as well to assure good data quality, as well as proper data bias testing. Additionally, the models must be sensitive to regional dynamics, in contrast to country level dynamics, as it will assure a better predictive value to the models.
+
+## Question 6
+The units on the SPAM file were unclear to me. I managed to compare them with the original file, but that generated some uncertainties.
+The dates for the SPAM and NUE, were as well different, making it that in practice the two should not be used in real research, given the potential differences which span for over 10 years. If the data does not exist for a similar year, then adjustments should be made to compensate that fact.
+
