@@ -92,10 +92,51 @@ ggplot(aes(x = Country, fill = factor(Variable))) +
   scale_y_continuous(labels = function(x) format(x, scientific = FALSE)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  labs(fill = "Variable")
+  labs(fill = "")
   
-
-
 # Save the plot as PDF
 ggsave("data/output/n_output_and_losses_plot.pdf", width = 10, height = 6)
 
+
+
+#### Extra code for Readme.md ####
+
+top_10_producers %>%
+  select(-Production_mt, -Total_N_Input, -NUE) %>%
+  pivot_longer(cols = c(N_Output, N_Losses), 
+               names_to = "Variable", 
+               values_to = "Value") %>%
+  # Create a bar plot for N Output and N Losses
+  ggplot(aes(x = Country, fill = factor(Variable))) +
+  geom_bar(aes(y = Value), stat = "identity", position = "dodge") +
+  ylab("Nitrogen (Mt)") +
+  ggtitle("N Output and N Losses for Top 10 Wheat Producers") +
+  scale_fill_manual(values = c("N_Output" = "#1DACE8", "N_Losses" = "#F24D29")) +
+  scale_y_continuous(labels = function(x) format(x, scientific = FALSE)) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(fill = "")
+
+ggsave("images/top_10_LO.png")
+
+
+top_10_producers %>%
+  select(-N_Output, -N_Losses, -Total_N_Input) %>%
+  pivot_longer(cols = c(Production_mt, NUE), 
+               names_to = "Variable", 
+               values_to = "Value") %>%
+  
+  # Create a bar plot for Production_mt and NUE in two separate facets
+  ggplot(aes(x = Country, fill = factor(Variable))) +
+  geom_bar(aes(y = Value), stat = "identity", position = "dodge") +
+  ylab("") +
+  ggtitle("Production and NUE for Top 10 Wheat Producers") +
+  scale_fill_manual(values = c("Production_mt" = "#EDCB64", "NUE" = "#456355")) +
+  #scale_y_continuous(labels = scales::label_number(scale = 1e-6)) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        strip.text = element_blank()) +
+  labs(fill = "") +
+  facet_wrap(~Variable, scales = "free_y", ncol = 1)
+
+ggsave("images/top_10_PN.png")
