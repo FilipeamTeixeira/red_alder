@@ -106,7 +106,6 @@ top_10_producers %>%
   pivot_longer(cols = c(N_Output, N_Losses), 
                names_to = "Variable", 
                values_to = "Value") %>%
-  # Create a bar plot for N Output and N Losses
   ggplot(aes(x = Country, fill = factor(Variable))) +
   geom_bar(aes(y = Value), stat = "identity", position = "dodge") +
   ylab("Nitrogen (Mt)") +
@@ -125,14 +124,11 @@ top_10_producers %>%
   pivot_longer(cols = c(Production_mt, NUE), 
                names_to = "Variable", 
                values_to = "Value") %>%
-  
-  # Create a bar plot for Production_mt and NUE in two separate facets
   ggplot(aes(x = Country, fill = factor(Variable))) +
   geom_bar(aes(y = Value), stat = "identity", position = "dodge") +
   ylab("") +
   ggtitle("Production and NUE for Top 10 Wheat Producers") +
   scale_fill_manual(values = c("Production_mt" = "#EDCB64", "NUE" = "#456355")) +
-  #scale_y_continuous(labels = scales::label_number(scale = 1e-6)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         strip.text = element_blank()) +
